@@ -83,7 +83,7 @@ class HttpServer :protected Server{
     long int content_length=0;
 
 public:
-    HttpServer(){
+    HttpServer(int portnum){
 
     }
 
