@@ -15,11 +15,12 @@ void error(const char *msg){
 
 class HttpServer :protected Server{
     std::string ok = "HTTP/1.1 200 OK\n";
-    std::string content= "Content-Type: text/html; charset=UFT-8\n";
-    std::string content_ct="Content-Length: ";
+    std::string content= "Content-Type: ";
+    std::string content_ct="\nContent-Length: ";
     std::string data="\n\n";
     long int content_length=0;
     char *requested_page="index.html", *client_address, *http_version;
+    std::string MIME_TYPE;
 
 public:
     HttpServer(){
@@ -56,19 +57,41 @@ protected:
       //std::cout<<data;
     }
 
-  /*  void set_headers(){
+   void set_headers(){
     bool dot_is_found=false;
-    std::string MIME_TYPE=std::string(requested_page);
-    int req_size=MIME_TYPE.length()-1;
-    std::string temp;
-    for(int ct=req_size;(MIME_TYPE[ct]!='.'&&ct>0);ct--){
-       temp.push_back(MIME_TYPE[ct]);
-
+    MIME_TYPE=std::string(requested_page);
+    size_t req_size=MIME_TYPE.find_last_of("/.");
+    MIME_TYPE=MIME_TYPE.substr(req_size+1);
+    std::cout<<"---MIME:"<<MIME_TYPE<<"------\n";
+    if((MIME_TYPE=="html")||MIME_TYPE==""){
+        MIME_TYPE="text/html";
+        this->content="Content-Type: text/html; charset=UFT-8";
+    }else if(MIME_TYPE=="css"){
+        MIME_TYPE=="Content-Type: text/css";
+        this->content=MIME_TYPE;
+    }else if(MIME_TYPE=="ico"){
+        MIME_TYPE="Content-Type: image/x-icon\n";
+        this->content=MIME_TYPE;
+    }else if(MIME_TYPE=="svg"){
+        MIME_TYPE="Content-Type: image/svg+xml\n";
+        this->content=MIME_TYPE;
+    }else if((MIME_TYPE=="jpg")||(MIME_TYPE=="jpeg")){
+        MIME_TYPE="Content-Type: image/jpeg\n";
+        this->content+=MIME_TYPE;
+    }else if(MIME_TYPE=="png"){
+        MIME_TYPE="Content-Type: image/png\n";
+        this->content=MIME_TYPE;
+    }else if(MIME_TYPE=="js"){
+        MIME_TYPE="Content-Type: text/javascript\n";
+        this->content=MIME_TYPE;
+    }else{
+        MIME_TYPE="text/plain\n";
+        this->content+=MIME_TYPE;
     }
-    reverse(temp.begin(),temp.end());
-    if(temp)
 
-*/
+
+
+}
 
 
 
@@ -77,7 +100,7 @@ protected:
 public:
     void send_HTTP(){
         this->decode_client_header();
-       // this->set_headers();
+        this->set_headers();
         //std::cout<<"ok";
         this->read_file(requested_page);
         std::string msg_string= this->ok + this->content + this->content_ct + std::to_string(this->content_length) + this->data; //concatenate all http headers
