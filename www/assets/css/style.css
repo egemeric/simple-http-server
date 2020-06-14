@@ -1,0 +1,36 @@
+@import 'normalize.css';
+@import 'font.css';
+html {background-color: #100806; font-family:'Didact Gothic', sans-serif}
+body {
+   margin-top: 25px;
+   font-size:16px;
+   color:#e7d0ba;
+   line-height:2rem;
+   letter-spacing:1.5px;
+   text-shadow:none;
+   display:flex;
+   flex-direction:column;
+   justify-content:space-between;
+   align-items:center;
+   opacity:1
+}
+hr {
+   margin: 0px;
+   background-color:transparent;
+   width:50%;
+   border-style:solid;
+   border-width:1px;
+   opacity:0.3
+}
+h1, h2, h3, h4, h5, h6{ margin-bottom:0.5em; text-align:center; opacity:0.6 }
+li {opacity:0.8}
+li a {opacity:0.9}
+ul {list-style-type:none}
+p {display:inline; opacity:0.8}
+a {color:#bb841a; text-decoration: none;}
+a:hover {color:#FFDF9E}
+.mainpanel h2{ margin:0px; font-size: x-large ; text-align: left; margin-top:10px; }
+.mainpanel img{ float:right; width: 200px; height: 200px; margin:4px }
+.sidepanel ul li { float: left; font-size:22px; margin:10px 10px 10px 0;}
+.container { display: flex; flex-direction: row; }
+.panel { text-align: center; margin-top: 10px; width: 600px; }
