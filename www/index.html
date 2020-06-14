@@ -1,34 +1,112 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-<title>Bahadır Kundak</title>
-<link rel='stylesheet' type='text/css' href='assets/css/style.css'>
-<meta charset="utf-8"/>
-</head>
-<body>
-	<div class="sidepanel">
-			<ul>
-	
-				<li><a href="https://www.github.com/bkundak" target="_blank">GitHub</a> |</li>
-	
-				<li><a href="mailto:bahadirkundak@pm.me" target="_blank">Mail</a> |</li>
 
-				<li><a href="development.html">Development</a></li>		
-			</ul>
-	</div>
-<hr>
-<div class="mainpanel">
-<h2>About Me</h2>
-<ul>
-	<li>I'm studying computer engineering at <a href="https://www.atilim.edu.tr/en/compe" target="_blank">Atilim University</a> since September 2017.</li>
-	<li><a href="assets/docs/cv.pdf" target="_blank">Download</a> my resume</li>	
-</ul>
-<hr>
-<h2>Languages</h2>
-	<ul>
-		<li> Turkish (Native Language) </li>
-		<li>English(Professional Working Proficiency)</li>
-	</ul>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" type="image/png" href="./images/favicon.png" />
+  <title>
+    Bahadır Kundak
+  </title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+ <!-- ***** About ***** -->
+    <div class="row">
+      <nav class="nav" role="navigation">
+        <ul class="nav__items">
+          <li class="nav__item">
+            <a href="#about" class="nav__link">About</a>
+          </li>
+          <li class="nav__item">
+            <a href="#contact" class="nav__link">Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <section class="about" id="about">
+      <div class="row">
+          <h2>Bahadır Kundak</h2>
+        <div class="about__content">
+          <div class="about__text">
+            <!-- Replace the below paragraph with info about yourself -->
+            <p>
+              I'm Bahadır. I've been studying computer engineering at 
+              <a href="https://www.atilim.edu.tr/en/compe">Atılım University</a>
+               since 2017. 
+              I'm currently working on my own game. 
+              My contact information below, you can reach me 24/7.
+            </p>
+            <!-- Provide a link to your resume -->
+            <a href="cv.pdf" target="_blank" class="btn">My Resume</a>
+            <a href="#contact" class="btn">Get in touch</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="dev" id="devs">
+    <div class="row">
+      <h2>Development</h2>
+      <div class="dev__logos">
+        <!-- Add logos of the devs or companies you'have worked with. --> 
+        <img src="./images/c.svg" class="dev__logo" alt="C" />
+        <img src="./images/cpp.svg" class="dev__logo" alt="C++" />
+        <img src="./images/python.svg" class="dev__logo" alt="Python" />
+        <img src="./images/django.svg" class="dev__logo" alt="Django" />
+        <img src="./images/htmlcss.png" class="dev__logo" alt="HTML//CSS" />
+        <img src="./images/unity.svg" class="dev__logo" alt="Unity" />
+      </div>
+    </div>
+  </section>
+  <!-- ***** Contact ***** -->
+
+  <section class="contact" id="contact">
+    <div class="row">
+      <h2>Get in Touch</h2>
+      <div class="contact__info">
+        <p>
+          Do you want a website? Or if you have any suggestions or 
+          just to say hello like "👋"<br>I would love to reply.
+          😊 The fastest way to contact me is an email.
+        </p>
+        <!-- Replace the email with yours -->
+        <a href="mailto:bahadirkundak@pm.me" class="btn">bahadirkundak@pm.me</a>
+        </div>
+    </div>
+  </section>
+
+  <!-- ***** Footer ***** -->
+
+  <footer role="contentinfo" class="footer">
+    <div class="row">
+      <!-- Update the links to point to your accounts -->
+      <ul class="footer__social-links">
+        <li class="footer__social-link-item">
+          <a href="https://twitter.com/bidikburger/" title="Link to Twitter Profile">
+            <img src="./images/twitter.svg" class="footer__social-image" alt="Twitter">
+          </a>
+        </li>
+        <li class="footer__social-link-item">
+          <a href="https://github.com/bkundak/" target="_blank" title="Link to Github Profile">
+            <img src="./images/github.svg" class="footer__social-image" alt="Github">
+          </a>
+        </li>
+        <li class="footer__social-link-item">
+          <a href="https://www.linkedin.com/in/bkundak/" target="_blank" title="Link to Linkedin Profile">
+            <img src="./images/linkedin.svg" class="footer__social-image" alt="Linkedin">
+          </a>
+        </li>
+      </ul>
+
+    
+      </div>
+    </div>
+  </footer>
+
+  
 </body>
 
 </html>
