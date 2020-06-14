@@ -93,10 +93,6 @@ protected:
 
 }
 
-
-
-
-
 public:
     void send_HTTP(){
         this->decode_client_header();
@@ -149,4 +145,3 @@ int main(void){
 
 
 }
-

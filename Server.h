@@ -34,8 +34,7 @@ protected:
         }
 
     }
-
-
+    
     void Listen_com(int queue_tcp=5){
         listen(this->sockfd,queue_tcp);
         this->clilen=sizeof(cli_addr);
@@ -55,21 +54,8 @@ protected:
     }
 
     void send_msg(const char *msg){
-
         send(this->newsockfd,msg,strlen(msg),0);
-
-
-
-
     }
     public:
-
-
 };
-
-
-
-
-
-
 #endif
