@@ -118,7 +118,7 @@ protected:
             MIME_TYPE="Content-Type: application/pdf\n";
             this->content=MIME_TYPE;
         }
-
+    
         else{
             MIME_TYPE="text/plain\n";
             this->content+=MIME_TYPE;
