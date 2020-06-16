@@ -84,7 +84,7 @@ protected:
             this->content=MIME_TYPE;
         }
         
-        else if((MIME_TYPE=="jpg")||(MIME_TYPE=="jpeg")){
+        else if((MIME_TYPE=="jpg")||(MIME_TYPE=="jpeg")||(MIME_TYPE=="jiff")){
             MIME_TYPE="Content-Type: image/jpeg\n";
             this->content+=MIME_TYPE;
         }
