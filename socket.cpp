@@ -118,6 +118,11 @@ protected:
             MIME_TYPE="Content-Type: application/pdf\n";
             this->content=MIME_TYPE;
         }
+        
+        else if(MIME_TYPE==".tif" || MIME_TYPE==".tiff"){
+            MIME_TYPE="Content-Type: image/tiff\n";
+            this->content=MIME_TYPE;
+        }
     
         else{
             MIME_TYPE="text/plain\n";
