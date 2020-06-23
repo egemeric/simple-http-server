@@ -6,6 +6,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <string.h>
+
 class Server {
 protected:
     int sockfd, newsockfd, portno;
