@@ -1,5 +1,3 @@
-
-
 class HttpServer :protected Server{
     std::string ok = "HTTP/1.1 200 OK\n";
     std::string content= "Content-Type: ";
@@ -23,6 +21,7 @@ protected:
         openfile.c_str();
         std::string line;
         std::ifstream html_page(openfile);
+        
         if(!html_page.is_open()){
             html_page.close();
             //perror("\n\nCant open the index file\n");
