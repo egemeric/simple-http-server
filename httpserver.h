@@ -1,7 +1,7 @@
 class HttpServer :protected Server{
-    std::string ok = "HTTP/1.1 200 OK\n";
+    std::string ok = "HTTP/1.1 200 OK\r\n";
     std::string content= "Content-Type: ";
-    std::string content_ct="\nContent-Length: ";
+    std::string content_ct="Content-Length: ";
     std::string data="\n\n";
     long int content_length=0;
     char *requested_page="index.html", *client_address, *http_version;
@@ -16,103 +16,103 @@ protected:
         if (std::string(filename)=="/"){
             filename="/index.html";
         }
-        
+
         std::string openfile(std::string("www")+filename); //index file location set
         openfile.c_str();
         std::string line;
         std::ifstream html_page(openfile);
-        
+
         if(!html_page.is_open()){
             html_page.close();
             //perror("\n\nCant open the index file\n");
             this->data=data.append("<html><body>Not found</body></html>"); //todo :not found page
             this->content_length=data.length()-2;
         }
-        
+
         else{
             while(!html_page.eof()){
                 getline(html_page,line);
                 this->content_length+=line.length();
                 data=data.append(line);
             }
-        
+
             html_page.close();
        }
-      
+
       //std::cout<<data;
-    
+
     }
-    
+
     void set_headers(){
         bool dot_is_found=false;
         MIME_TYPE=std::string(requested_page);
         size_t req_size=MIME_TYPE.find_last_of("/.");
         MIME_TYPE=MIME_TYPE.substr(req_size+1);
         std::cout<<"---MIME:"<<MIME_TYPE<<"------\n";
-        
+
         if((MIME_TYPE=="html")||MIME_TYPE==""){
             MIME_TYPE="text/html";
-            this->content="Content-Type: text/html; charset=UFT-8";
+            this->content="Content-Type: text/html; charset=UFT-8\r\n\r\n";
         }
-        
+
         else if(MIME_TYPE=="css"){
-            MIME_TYPE=="Content-Type: text/css";
+            MIME_TYPE=="Content-Type: text/css\r\n\r\n";
             this->content=MIME_TYPE;
         }
-    
+
         else if(MIME_TYPE=="ico"){
-            MIME_TYPE="Content-Type: image/x-icon\n";
+            MIME_TYPE="Content-Type: image/x-icon\r\n\r\n";
             this->content=MIME_TYPE;
         }
-    
+
         else if(MIME_TYPE=="svg"){
-            MIME_TYPE="Content-Type: image/svg+xml\n";
+            MIME_TYPE="Content-Type: image/svg+xml\r\n\r\n";
             this->content=MIME_TYPE;
         }
-        
+
         else if((MIME_TYPE=="jpg")||(MIME_TYPE=="jpeg")||(MIME_TYPE=="jiff")){
-            MIME_TYPE="Content-Type: image/jpeg\n";
+            MIME_TYPE="Content-Type: image/jpeg\r\n\r\n";
             this->content=MIME_TYPE;
         }
-        
+
         else if(MIME_TYPE=="png"){
-            MIME_TYPE="Content-Type: image/png\n";
+            MIME_TYPE="Content-Type: image/png\r\n\r\n";
             this->content=MIME_TYPE;
         }
-        
+
         else if(MIME_TYPE=="js"){
-            MIME_TYPE="Content-Type: text/javascript\n";
+            MIME_TYPE="Content-Type: text/javascript\r\n\r\n";
             this->content=MIME_TYPE;
         }
-        
+
         else if(MIME_TYPE=="ttf"){
-            MIME_TYPE="Content-Type: font/ttf\n";
+            MIME_TYPE="Content-Type: font/ttf\r\n\r\n";
             this->content=MIME_TYPE;
         }
-        
+
         else if(MIME_TYPE=="woff"){
-            MIME_TYPE="Content-Type: font/woff\n";
+            MIME_TYPE="Content-Type: font/woff\r\n\r\n";
             this->content=MIME_TYPE;
         }
 
         else if(MIME_TYPE=="woff2"){
-            MIME_TYPE="Content-Type: font/woff2\n";
+            MIME_TYPE="Content-Type: font/woff2\r\n\r\n";
             this->content=MIME_TYPE;
         }
 
         else if(MIME_TYPE=="pdf"){
-            MIME_TYPE="Content-Type: application/pdf\n";
+            MIME_TYPE="Content-Type: application/pdf\r\n\r\n";
             this->content=MIME_TYPE;
         }
-        
+
         else if(MIME_TYPE==".tif" || MIME_TYPE==".tiff"){
-            MIME_TYPE="Content-Type: image/tiff\n";
+            MIME_TYPE="Content-Type: image/tiff\r\n\r\n";
             this->content=MIME_TYPE;
         }
-    
+
         else{
             MIME_TYPE="text/plain\n";
-            this->content+=MIME_TYPE;
+            this->content=MIME_TYPE;
         }
 }
 
@@ -122,12 +122,9 @@ public:
         this->set_headers();
         //std::cout<<"ok";
         this->read_file(requested_page);
-        std::string msg_string= this->ok + this->content + this->content_ct + std::to_string(this->content_length) + this->data; //concatenate all http headers
-        int msg_len=msg_string.length();
-        char send_msg_char[msg_len+1];
-        strcpy(send_msg_char, msg_string.c_str());
-        printf("---%s----",send_msg_char);
-        this->send_msg(send_msg_char);
+        std::string msg_string= this->ok +this->content+this->content_ct + std::to_string(this->content_length)  + this->data ; //concatenate all http headers
+
+        this->send_str(msg_string);
         close(newsockfd);
         close(sockfd);
         //decode_client_header();
@@ -146,13 +143,13 @@ public:
             if (stack_headers.size()>=3)
                 break;
         }
-    
+
         this->requested_page=stack_headers[0]; //reemove  first "/" from get request
         this->client_address=stack_headers[2];
         this->http_version=stack_headers[1];
-    
+
         printf("%s\n %s\n %s\n ",requested_page,client_address,http_version);
         stack_headers.clear();
-    
+
     }
 };

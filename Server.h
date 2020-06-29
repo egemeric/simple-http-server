@@ -36,7 +36,7 @@ protected:
             ACCEPT_CON();
         }
     }
-    
+
     void Listen_com(int queue_tcp=5){
         listen(this->sockfd,queue_tcp);
         this->clilen=sizeof(cli_addr);
@@ -48,7 +48,7 @@ protected:
         if(this->newsockfd<0){
             assert("Error on accept state");
         }
-        
+
         else{
             printf("Connection from %s\n",inet_ntoa(cli_addr.sin_addr));
             this->n=read(newsockfd,this->buffer,1024);
@@ -58,10 +58,22 @@ protected:
         }
     }
 
-    void send_msg(const char *msg){
-        send(this->newsockfd,msg,strlen(msg),0);
+    void send_data(const char *msg, int datalen){
+        const char *ptr = static_cast<const char*>(msg);
+        while (datalen > 0) {
+            int bytes = send(this->newsockfd, ptr, datalen, 0);
+            if (bytes <=0)
+                break;
+            ptr += bytes;
+            datalen -= bytes;
+        }
+       // send(this->newsockfd,msg,strlen(msg),0);
     }
-    
+
+    void send_str(const std::string &http_string){
+        send_data(http_string.c_str(),http_string.size());
+    }
+
     public:
 };
 #endif
