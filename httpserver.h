@@ -65,16 +65,19 @@ protected:
             this->content=MIME_TYPE;
         }
 
-        else if(MIME_TYPE=="svg"){
+       /* 
+       else if(MIME_TYPE=="svg"){
             MIME_TYPE="Content-Type: image/svg+xml\r\n\r\n";
             this->content=MIME_TYPE;
         }
+        */
 
         else if((MIME_TYPE=="jpg")||(MIME_TYPE=="jpeg")||(MIME_TYPE=="jiff")){
             MIME_TYPE="Content-Type: image/jpeg\r\n\r\n";
             this->content=MIME_TYPE;
         }
 
+        
         else if(MIME_TYPE=="png"){
             MIME_TYPE="Content-Type: image/png\r\n\r\n";
             this->content=MIME_TYPE;
