@@ -16,7 +16,9 @@ protected:
     struct sockaddr_in serv_addr, cli_addr;
     int n;
 //public:
+
     Server(int Portnum=8888){
+
        this->sockfd=socket(AF_INET,SOCK_STREAM,0);
        setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &temp, sizeof(temp)); //forece reuse the port
        if (sockfd<0){
@@ -37,7 +39,7 @@ protected:
         }
     }
 
-    void Listen_com(int queue_tcp=5){
+    void Listen_com(int queue_tcp=10){
         listen(this->sockfd,queue_tcp);
         this->clilen=sizeof(cli_addr);
     }

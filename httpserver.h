@@ -38,9 +38,7 @@ protected:
 
             html_page.close();
        }
-
       //std::cout<<data;
-
     }
 
     void set_headers(){
@@ -52,69 +50,71 @@ protected:
 
         if((MIME_TYPE=="html")||MIME_TYPE==""){
             MIME_TYPE="text/html";
-            this->content="Content-Type: text/html; charset=UFT-8\r\n\r\n";
+            this->content="Content-Type: text/html; charset=UFT-8\r\n";
         }
 
         else if(MIME_TYPE=="css"){
-            MIME_TYPE=="Content-Type: text/css\r\n\r\n";
+            MIME_TYPE=="Content-Type: text/css\r\n";
             this->content=MIME_TYPE;
         }
 
         else if(MIME_TYPE=="ico"){
-            MIME_TYPE="Content-Type: image/x-icon\r\n\r\n";
+            MIME_TYPE="Content-Type: image/x-icon\r\n";
             this->content=MIME_TYPE;
         }
 
-       /* 
+
        else if(MIME_TYPE=="svg"){
-            MIME_TYPE="Content-Type: image/svg+xml\r\n\r\n";
+            MIME_TYPE="Keep-Alive: timeout=5, max=98\r\nConnection: Keep-Alive\r\nContent-Type: image/svg+xml\r\n ";
             this->content=MIME_TYPE;
+
         }
-        */
+
 
         else if((MIME_TYPE=="jpg")||(MIME_TYPE=="jpeg")||(MIME_TYPE=="jiff")){
-            MIME_TYPE="Content-Type: image/jpeg\r\n\r\n";
+            MIME_TYPE="Content-Type: image/jpeg\r\n\r";
             this->content=MIME_TYPE;
         }
 
-        
+
         else if(MIME_TYPE=="png"){
-            MIME_TYPE="Content-Type: image/png\r\n\r\n";
+            MIME_TYPE="Content-Type: image/png\r\n\r";
             this->content=MIME_TYPE;
+            this->content_length=0;
         }
 
         else if(MIME_TYPE=="js"){
-            MIME_TYPE="Content-Type: text/javascript\r\n\r\n";
+            MIME_TYPE="Content-Type: text/javascript\r\n\r";
             this->content=MIME_TYPE;
         }
 
         else if(MIME_TYPE=="ttf"){
-            MIME_TYPE="Content-Type: font/ttf\r\n\r\n";
+            MIME_TYPE="Content-Type: font/ttf\r\n\r";
             this->content=MIME_TYPE;
         }
 
         else if(MIME_TYPE=="woff"){
-            MIME_TYPE="Content-Type: font/woff\r\n\r\n";
+            MIME_TYPE="Content-Type: font/woff\r\n\r";
             this->content=MIME_TYPE;
         }
 
         else if(MIME_TYPE=="woff2"){
-            MIME_TYPE="Content-Type: font/woff2\r\n\r\n";
+            MIME_TYPE="Content-Type: font/woff2\r\n\r";
             this->content=MIME_TYPE;
         }
 
         else if(MIME_TYPE=="pdf"){
-            MIME_TYPE="Content-Type: application/pdf\r\n\r\n";
+            MIME_TYPE="Content-Type: application/pdf\r\n\r";
             this->content=MIME_TYPE;
         }
 
         else if(MIME_TYPE==".tif" || MIME_TYPE==".tiff"){
-            MIME_TYPE="Content-Type: image/tiff\r\n\r\n";
+            MIME_TYPE="Content-Type: image/tiff\r\n\r";
             this->content=MIME_TYPE;
         }
 
         else{
-            MIME_TYPE="text/plain\n";
+            MIME_TYPE="text/plain\r\n";
             this->content=MIME_TYPE;
         }
 }
@@ -125,23 +125,25 @@ public:
         this->set_headers();
         //std::cout<<"ok";
         this->read_file(requested_page);
-        std::string msg_string= this->ok +this->content+this->content_ct + std::to_string(this->content_length)  + this->data ; //concatenate all http headers
+        std::string msg_string= this->ok +this->content+this->content_ct + std::to_string(this->content_length) +""+ this->data ; //concatenate all http headers
+        std::cout<<msg_string<<std::endl;
 
         this->send_str(msg_string);
-        close(newsockfd);
-        close(sockfd);
+         close(newsockfd);
+         close(sockfd);
         //decode_client_header();
     }
 
     void decode_client_header(){
         int ct=0;
+        char *saveptr;
         char *parse_dat =this->buffer;
         std::vector<char*> stack_headers;
-        char *http_headers=strtok(parse_dat," ");
+        char *http_headers=strtok_r(parse_dat," ",&saveptr);
 
         while (http_headers!=NULL){
             //printf("%s\n",http_headers);
-            http_headers=strtok(NULL," ");
+            http_headers=strtok_r(NULL," ",&saveptr);
             stack_headers.push_back(http_headers);
             if (stack_headers.size()>=3)
                 break;
@@ -153,6 +155,5 @@ public:
 
         printf("%s\n %s\n %s\n ",requested_page,client_address,http_version);
         stack_headers.clear();
-
     }
 };
