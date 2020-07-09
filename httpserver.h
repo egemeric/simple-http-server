@@ -38,9 +38,7 @@ protected:
 
             html_page.close();
        }
-
       //std::cout<<data;
-
     }
 
     void set_headers(){
@@ -153,6 +151,5 @@ public:
 
         printf("%s\n %s\n %s\n ",requested_page,client_address,http_version);
         stack_headers.clear();
-
     }
 };
