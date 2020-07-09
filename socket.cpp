@@ -16,12 +16,9 @@ int main(void){
             std::cout<<"Your site works on port 8888\n";
 
             while(1){
-
                     HttpServer *HTTP= new HttpServer;
                     HTTP->send_HTTP();
                     usleep(300);
                     delete HTTP;
-
-
             }
 }
