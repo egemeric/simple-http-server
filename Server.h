@@ -18,7 +18,6 @@ protected:
 //public:
 
     Server(int Portnum=8888){
-
        this->sockfd=socket(AF_INET,SOCK_STREAM,0);
        setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &temp, sizeof(temp)); //forece reuse the port
        if (sockfd<0){
