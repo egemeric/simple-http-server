@@ -1,3 +1,4 @@
-void error(const char *msg){
+void error(const char *msg)
+{
     error(msg);
 }
