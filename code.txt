@@ -1,0 +1,33 @@
+
+
+std::unordered_map<std::string, std::string> mime;
+
+mime.insert({"html", "text/html"});
+mime.insert({"ico", "image/x-icon"});
+mime.insert({"", ""});
+
+auto GetMimeTypeForExtension(std::string ext) { return mime[ext]; }
+
+auto GetContentType(std::string ext, int keepAlive = 0) {
+  auto type = mime[ext];
+  std::stringstream ss;  
+  ss << "Content-Type:" << type << "\r\n";
+  if(keepAlive > 0)
+   ss << "Keep-Alive: " << keepAlive << ",max=98
+  return ss.str();
+}
+
+
+---------------------------------------------------------------------------
+
+std::string FileToString(std::string file) // Later use std::filesystem::path
+{
+  std::ifstream t(file);
+  return std::string((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
+}
+
+auto x = FileToString("hello.txt");
+return x.is_empty() ? "<html>......" : x.c_str();
+
+----------------------------------------------------------------------------
+
