@@ -1,0 +1,64 @@
+/* Body styles */
+body {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Styles for headings */
+h1,
+h2,
+h3 {
+  color: #fff;
+}
+
+/* Styles for paragraphs */
+p {
+  color: #ccc;
+}
+
+/* Styles for lists */
+ul,
+ol {
+  color: #ccc;
+}
+
+/* Styles for links */
+a {
+  color: #00bfff;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+/* Styles for images */
+img {
+  filter: brightness(0.8) contrast(1.2);
+}
+
+/* Styles for form elements */
+form {
+  background-color: #222;
+}
+
+label {
+  color: #ccc;
+}
+
+input,
+select {
+  color: #fff;
+  background-color: #444;
+  border: 1px solid #666;
+}
+
+input[type="submit"] {
+  background-color: #00bfff;
+  color: #fff;
+  transition: background-color 0.2s ease-in-out;
+}
+
+input[type="submit"]:hover {
+  background-color: #0080ff;
+}
