@@ -1,2 +1,6 @@
 
 *.json
+
+# Build output
+simple-http-server
+*.exe
